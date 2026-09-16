@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A lightweight, local-first Adobe Illustrator AI file viewer for PDF-compatible AI files." />
+  <title>AI File Viewer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell" id="appShell">
+    <header class="topbar">
+      <div class="brand" aria-label="AI File Viewer">
+        <div class="brand-mark" aria-hidden="true">Ai</div>
+        <div class="brand-copy">
+          <strong>AI File Viewer</strong>
+          <span>v0.1.0</span>
+        </div>
+      </div>
+
+      <div class="file-summary" id="fileSummary" title="No file open">
+        <span class="status-dot" id="statusDot"></span>
+        <span id="fileName">No file open</span>
+      </div>
+
+      <div class="top-actions">
+        <span class="privacy-badge" title="Files stay in your browser">Local only</span>
+        <button class="button primary" id="openButton" type="button">Open AI File</button>
+        <input id="fileInput" type="file" accept=".ai,.pdf,application/pdf" hidden />
+      </div>
+    </header>
+
+    <main class="viewer" id="viewer">
+      <section class="empty-state" id="emptyState">
+        <div class="empty-icon" aria-hidden="true">Ai</div>
+        <h1>Drop an Illustrator file here</h1>
+        <p>View PDF-compatible <strong>.ai</strong> files directly in your browser. Nothing is uploaded.</p>
+        <button class="button primary large" id="emptyOpenButton" type="button">Choose a file</button>
+        <p class="hint">You can also open a PDF to test the viewer.</p>
+      </section>
+
+      <section class="document-view" id="documentView" hidden>
+        <div class="viewport" id="viewport" tabindex="0" aria-label="Document viewport">
+          <div class="canvas-stage" id="canvasStage">
+            <canvas id="pdfCanvas" aria-label="Rendered artwork"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <div class="drop-overlay" id="dropOverlay" hidden>
+        <div>
+          <span class="drop-icon" aria-hidden="true">↓</span>
+          <strong>Drop file to open</strong>
+          <span>.ai or .pdf</span>
+        </div>
+      </div>
+
+      <div class="message" id="message" role="status" aria-live="polite" hidden></div>
+    </main>
+
+    <footer class="toolbar" id="toolbar" hidden>
+      <div class="toolbar-group page-controls">
+        <button class="icon-button" id="prevPage" type="button" title="Previous page" aria-label="Previous page">‹</button>
+        <span class="page-readout"><span id="pageNumber">1</span> / <span id="pageCount">1</span></span>
+        <button class="icon-button" id="nextPage" type="button" title="Next page" aria-label="Next page">›</button>
+      </div>
+
+      <div class="toolbar-divider"></div>
+
+      <div class="toolbar-group zoom-controls">
+        <button class="icon-button" id="zoomOut" type="button" title="Zoom out" aria-label="Zoom out">−</button>
+        <button class="zoom-readout" id="actualSize" type="button" title="Reset to 100%"><span id="zoomValue">100%</span></button>
+        <button class="icon-button" id="zoomIn" type="button" title="Zoom in" aria-label="Zoom in">+</button>
+        <button class="text-button" id="fitButton" type="button" title="Fit artwork to window">Fit</button>
+      </div>
+
+      <div class="toolbar-divider"></div>
+
+      <div class="toolbar-group">
+        <button class="icon-button" id="fullscreenButton" type="button" title="Fullscreen" aria-label="Fullscreen">⛶</button>
+      </div>
+
+      <div class="toolbar-help">Drag to pan · Ctrl/⌘ + wheel to zoom · 0 fit · 1 actual size</div>
+    </footer>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
